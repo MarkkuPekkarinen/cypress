@@ -1,4 +1,12 @@
 <!-- See the ../guides/writing-the-cypress-changelog.md for details on writing the changelog. -->
+## 12.18.0
+
+_Released 07/18/2023 (PENDING)_
+
+**Performance:**
+
+- Fixed an issue where unnecessary requests were being paused. No longer sends `X-Cypress-Is-XHR-Or-Fetch` header and infers resource type off of the server pre-request object. Fixes [#26620](https://github.com/cypress-io/cypress/issues/26620) and [#26622](https://github.com/cypress-io/cypress/issues/26622).
+
 ## 12.17.0
 
 _Released 07/05/2023_
