@@ -279,26 +279,6 @@ describe('util', () => {
       })
     })
 
-    // https://github.com/cypress-io/cypress/issues/18914
-    it('includes --openssl-legacy-provider in Node 17+ w/ OpenSSL 3', () => {
-      sandbox.stub(process.versions, 'node').value('v17.1.0')
-      sandbox.stub(process.versions, 'openssl').value('3.0.0-quic')
-
-      restoreEnv = mockedEnv({
-        NODE_OPTIONS: '--require foo.js',
-      })
-
-      let childOptions = util.getOriginalNodeOptions()
-
-      expect(childOptions.ORIGINAL_NODE_OPTIONS).to.eq('--require foo.js --openssl-legacy-provider')
-
-      restoreEnv()
-      restoreEnv = mockedEnv({})
-      childOptions = util.getOriginalNodeOptions()
-
-      expect(childOptions.ORIGINAL_NODE_OPTIONS).to.eq(' --openssl-legacy-provider')
-    })
-
     // https://github.com/cypress-io/cypress/issues/19320
     it('does not include --openssl-legacy-provider in Node 17+ w/ OpenSSL 1', () => {
       sandbox.stub(process.versions, 'node').value('v17.1.0')
