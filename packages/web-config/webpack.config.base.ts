@@ -82,9 +82,11 @@ function makeSassLoaders ({ modules }: { modules: boolean }): RuleSetRule {
       {
         loader: require.resolve('postcss-loader'),
         options: {
-          plugins: [
-            require('autoprefixer')({ overrideBrowserslist: ['last 2 versions'], cascade: false }),
-          ],
+          postcssOptions: {
+            plugins: [
+              require('autoprefixer')({ overrideBrowserslist: ['last 2 versions'], cascade: false }),
+            ],
+          },
         },
       },
       {
@@ -215,7 +217,7 @@ export const getCommonConfig = () => {
           : evalDevToolPlugin
         ),
       ],
-      ...(liveReloadEnabled ? [new LiveReloadPlugin({ appendScriptTag: 'true', port: 0, hostname: 'localhost', protocol: 'http' })] : []),
+      ...(liveReloadEnabled ? [new LiveReloadPlugin({ appendScriptTag: true, port: 0, hostname: 'localhost', protocol: 'http' })] : []),
     ],
 
     cache: true,
