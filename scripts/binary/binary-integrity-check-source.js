@@ -94,8 +94,6 @@ function validateElectron (electron) {
 
 function validateFs (fs) {
   // Hard coded function as this is electron code and there's not an easy way to get the function string at package time. If this fails on an updated version of electron, we'll need to update this.
-  console.log('new read file sync')
-  console.log(toString.call(fs.readFileSync))
   if (toString.call(fs.readFileSync) !== `function(e,s){const r=splitPath(e);if(!r.isAsar)return F.apply(this,arguments);const{asarPath:n,filePath:a}=r,o=getOrCreateArchive(n);if(!o)throw createError("INVALID_ARCHIVE",{asarPath:n});const c=o.getFileInfo(a);if(!c)throw createError("NOT_FOUND",{asarPath:n,filePath:a});if(0===c.size)return s?"":i.Buffer.alloc(0);if(c.unpacked){const e=o.copyFileOut(a);return t.readFileSync(e,s)}if(s){if("string"==typeof s)s={encoding:s};else if("object"!=typeof s)throw new TypeError("Bad arguments")}else s={encoding:null};const{encoding:f}=s,l=i.Buffer.alloc(c.size),u=o.getFdAndValidateIntegrityLater();if(!(u>=0))throw createError("NOT_FOUND",{asarPath:n,filePath:a});return logASARAccess(n,a,c.offset),t.readSync(u,l,0,c.size,c.offset),validateBufferIntegrity(l,c.integrity),f?l.toString(f):l}`) {
     console.error(`Integrity check failed for toString.call(fs.readFileSync)`)
     throw new Error(integrityErrorMessage)
